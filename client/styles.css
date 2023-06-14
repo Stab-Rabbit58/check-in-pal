@@ -4,6 +4,8 @@ body {
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   height: 150vh;
+  margin-top: 80px;
+  padding: 30px;
 }
 
 @keyframes gradient {
@@ -136,6 +138,66 @@ td {
   padding: 10px;
   font-size: 25px;
   box-shadow: -2px 3px 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* NavBar */
+.navbar {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.ToDo {
+  color: black;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 22px;
+  
+}
+
+.ToDo:hover {
+  color: white;
+  background-color: lightblue;
+}
+
+.Home {
+  color: black;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.Home:hover {
+  color: white;
+  background-color: lightblue;
+}
+
+.StudyZone {
+  color: black;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.StudyZone:hover {
+  color: white;
+  background-color: lightblue;
+}
+
+.UserProfile {
+  color: black;
+  position: fixed;
+  right: 0;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 20px;
 }
 
 /* google search bar styling */
