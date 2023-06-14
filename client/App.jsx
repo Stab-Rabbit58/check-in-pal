@@ -27,8 +27,7 @@ const App = () => {
         <Route path="/todo" />
         <Route path="/studyzone" />
       </Routes>
-      {/* <SignUp/> */}
-    </>
+      {/* <SignUp/> */}    </>
   );
 }
 
