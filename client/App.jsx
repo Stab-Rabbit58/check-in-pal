@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import TaskTimer from './Components/TaskTimer.jsx';
 import Study from './Components/Study.jsx';
+import TaskWindow from './Components/ToDoList.jsx';
 
 const App = () => {
   // create state called 'activity' and assign it to empty string and it's setter function as 'setActivity'
@@ -20,7 +21,7 @@ const App = () => {
     // create routes
     <>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<TaskWindow />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/checkin" />
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/studyzone" element={<Study />} />
       </Routes>
       {/* <SignUp/> */}
+      {/* <TaskWindow /> */}
     </>
   );
 };
