@@ -4,10 +4,13 @@ import SwitchDisplay from './Components/SwitchDisplay.jsx';
 import ActivityDisplay from './Components/ActivityDisplay.jsx';
 import CheckoutDisplay from './Components/CheckoutDisplay.jsx';
 import Login from './Components/Login.jsx';
-import SignUp from './Components/SignUp.jsx'
+import SignUp from './Components/SignUp.jsx';
+import NavBar from './Components/NavBar.jsx';
 import Home from './Components/Home.jsx'
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import TaskTimer from './Components/TaskTimer.jsx';
+import Study from './Components/Study.jsx';
 
 const App = () => {
   // create state called 'activity' and assign it to empty string and it's setter function as 'setActivity'
