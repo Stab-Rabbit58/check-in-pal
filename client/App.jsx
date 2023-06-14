@@ -28,8 +28,7 @@ const App = () => {
         <Route path="/todo" />
         <Route path="/studyzone" element={<Study />} />
       </Routes>
-      {/* <SignUp/> */}
-    </>
+      {/* <SignUp/> */}    </>
   );
 };
 
