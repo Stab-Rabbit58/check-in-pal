@@ -17,14 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 // Require in all our routers
 const loginRouter = require('./routes/login');
 const signupRouter = require('./routes/signup')
-// const activityRouter = require('./routes/activity');
+const todoRouter = require('./routes/todo');
 // const checkoutRouter = require ('./routes/checkout');
 
 
 // Route handlers
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
-// app.use('/activity', activityRouter);
+app.use('/todo', todoRouter);
 // app.use('/checkout', checkoutRouter);
 
 
