@@ -5,6 +5,7 @@ import ActivityDisplay from './Components/ActivityDisplay.jsx';
 import CheckoutDisplay from './Components/CheckoutDisplay.jsx';
 import Login from './Components/Login.jsx';
 import SignUp from './Components/SignUp.jsx'
+import NavBar from './Components/NavBar.jsx'
 import Home from './Components/Home.jsx'
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/studyzone" />
       </Routes>
       {/* <SignUp/> */}
+      
     </>
   );
 }
