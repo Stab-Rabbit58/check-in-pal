@@ -25,6 +25,7 @@ const SignUp = () => {
       body: JSON.stringify({ username, password }),
     })
       .then((response) => {
+        console.log('response: ', response);
         if (response.status === 200) {
           navigate('/home');
         } else {
