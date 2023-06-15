@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.post('/', userController.verifyUser, (req, res) => {
-  res.sendStatus(200);
+  res.status(200).json({ userID: res.locals.userID });
 });
 
 //export module

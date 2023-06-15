@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import {
   List,
   ListItem,
@@ -15,6 +15,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 import { render } from 'react-dom';
 import NavBar from './NavBar.jsx';
+import { UserContext } from '../MyContext.js';
 
 const TaskWindow = () => {
   // State for list of items
@@ -25,20 +26,20 @@ const TaskWindow = () => {
   const [checked, setChecked] = useState([]);
   const taskItemRef = useRef();
   const updateRef = useRef();
+  const { userID } = useContext(UserContext);
 
-  const LOCAL_STORAGE_KEY = 'currentTodos';
+  // const LOCAL_STORAGE_KEY = 'currentTodos';
+  // 
+  // // persists data when page first loads
+  // useEffect(() => {
+  //   const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+  //   if (storedTodos) setList(storedTodos);
+  // }, []);
 
-  // persists data when page first loads
-  useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (storedTodos) setList(storedTodos);
-  }, []);
-
-  // this useEffect saves it to a local storage anytime [todos] changes
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list))
-  }, [list]);
-
+  // // this useEffect saves it to a local storage anytime [todos] changes
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list))
+  // }, [list]);
 
 
   // checkbox for each task
@@ -121,22 +122,28 @@ const TaskWindow = () => {
     // make a fetch request to backend here
     const { method, value, oldVal } = stateFetch;
 
-    if (method === 'GET') {
-      fetch('/todo', {
-        method: method,
+    if (method === 'GET') { // actually using post request to send request body
+      fetch('/todo/init', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ userID })
       })
-        .then(response => console.log('backend response', response))
+        .then(response => response.json())
+        .then(data => {
+          console.log('backend response', data)
+          setList(data);
+          setFetch({ ...stateFetch, method: 'null' })
+        })
         .catch(err => console.log('err from fetch in todolist', err));
-    } else {
+    } else if (method !== 'null') {
       fetch('/todo', {
         method: method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ task: value, oldVal })
+        body: JSON.stringify({ task: value, oldVal, userID })
       })
         .then(response => console.log('backend response', response))
         .catch(err => console.log('err from fetch in todolist', err));
@@ -147,7 +154,7 @@ const TaskWindow = () => {
         return (
           <ListItem key={idx} id={idx}>
             <ListItemButton
-              key={idx}
+              key={`button-${idx}`}
               className="checkButton"
               onClick={() => handleCheck(task)}
             >
@@ -164,7 +171,6 @@ const TaskWindow = () => {
             <IconButton
               style={{ margin: 'auto 5px' }}
               edge="end"
-              key={idx}
               className="editButton"
               onClick={() => handleEditOpen(idx)}
             >
@@ -173,7 +179,6 @@ const TaskWindow = () => {
             <IconButton
               style={{ margin: 'auto 5px' }}
               edge="end"
-              key={idx}
               className="deleteButton"
               onClick={() => handleDelete(idx)}
             >
@@ -192,7 +197,6 @@ const TaskWindow = () => {
             <IconButton
               style={{ margin: 'auto 5px' }}
               edge="end"
-              key={idx}
               className="checkButton"
               onClick={() => handleEditClose(idx)}
             >
@@ -201,7 +205,6 @@ const TaskWindow = () => {
             <IconButton
               style={{ margin: 'auto 5px' }}
               edge="end"
-              key={idx}
               className="deleteButton"
               onClick={() => handleDelete(idx)}
             >

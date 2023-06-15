@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router";
 import { Grid, Paper, TextField, Button, FormGroup } from "@mui/material";
+import { UserContext } from '../MyContext';
 
 
 const SignUp = () => {
@@ -9,6 +10,8 @@ const SignUp = () => {
 
   const usernameRef = useRef();
   const passRef = useRef();
+
+  const { userID, setUserID } = useContext(UserContext);
 
   const handleSubmit = (e) => {
 
@@ -27,14 +30,15 @@ const SignUp = () => {
       },
       body: JSON.stringify({ username, password })
     })
-      .then((response) => {
-        console.log('response: ', response);
+      .then(response => {
         if (response.status === 200) {
           navigate('/home')
         } else {
           window.alert('Username already exists!')
         }
+        return response.json();
       })
+      .then(data => setUserID(data.userID))
       .catch(err => console.log('error', err))
 
   }
@@ -68,7 +72,6 @@ const SignUp = () => {
     <div className="sign-up">
 
       <form onSubmit={handleSubmit}>
-        {/* <Grid> */}
         <Paper elevation={10} style={paperStyle}>
           <h2>Sign Up</h2>
           <FormGroup>
@@ -98,34 +101,10 @@ const SignUp = () => {
             <Button onClick={() => navigate('/login')}>Back to login</Button>
           </FormGroup>
         </Paper>
-        {/* </Grid> */}
       </form>
     </div>
   )
 
-
-  //  <form onSubmit = {handleSubmit}>
-  //     <FormControl>
-  //       <FormLabel>Enter UserName or Email</FormLabel>
-  //       <TextField
-  // required
-  // label='UserName'
-  // variant='Outlined'
-  //       />
-  //     </FormControl>
-  //     <FormControl>
-  //       <FormLabel>Enter Password</FormLabel>
-  //       <TextField
-  //         required
-  //         label='Password'
-  //         type='Password' 
-  //         variant='Filled'
-  //       />
-  //       <Button type="submit" variant="contained">
-  //         Submit
-  //       </Button>
-  //     </FormControl>
-  //   </form>
 }
 
 export default SignUp;

@@ -9,7 +9,15 @@ userController.newUser = async (req, res, next) => {
   try {
     await db.query(text, [username, password]);
     console.log('New user created!')
+
+    // get userid
+    const queryStringID = `SELECT _id FROM public.users WHERE username = $1 AND password = $2;`
+    const userID = await db.query(queryStringID, [username, password]);
+    console.log('userID: ', userID.rows[0]._id);
+    res.locals.userID = userID.rows[0]._id;
+
     return next();
+
   } catch (err) {
     console.error(err)
     return next({
@@ -29,6 +37,13 @@ userController.verifyUser = async (req, res, next) => {
     const result = await db.query(text, [username, password]);
     if (result.rows.length > 0) {
       console.log('User verified!');
+
+      // get userid
+      const queryStringID = `SELECT _id FROM public.users WHERE username = $1 AND password = $2;`
+      const userID = await db.query(queryStringID, [username, password]);
+      console.log('userID: ', userID.rows[0]._id);
+      res.locals.userID = userID.rows[0]._id;
+
       return next();
     } else {
       return next({
