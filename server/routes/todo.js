@@ -11,9 +11,9 @@ router.delete('/', todoController.deleteTask, (req, res) => {
   res.sendStatus(200);
 });
 
-router.get('/', todoController.getTask, (req, res) => {
-  res.send(200).json(res.locals.tasks)
-})
+// router.get('/', todoController.getTask, (req, res) => {
+//   res.send(200).json(res.locals.tasks)
+// })
 
 //export module
 module.exports = router;
