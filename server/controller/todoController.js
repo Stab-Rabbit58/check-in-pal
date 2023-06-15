@@ -3,11 +3,11 @@ const db = require('../models/userModel');
 const todoController = {};
 
 todoController.addTask = async (req, res, next) => {
-  const { task, key } = req.body;
-  const text = `INSERT INTO public.tasks VALUES (DEFAULT, $1, DEFAULT)`
+  const { task } = req.body;
+  const text = `INSERT INTO public.tasks VALUES (DEFAULT, $1, $2)`
   console.log('entered middleware new task')
   try {
-    await db.query(text, [task]);
+    await db.query(text, [task, '1']);
     console.log('New task created!')
     return next();
   } catch (err) {

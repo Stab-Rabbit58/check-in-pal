@@ -19,12 +19,13 @@ CREATE TABLE public.users (
 );
 
 CREATE TABLE public.tasks (
-  "_id" serial NOT NULL,
-  "task" varchar UNIQUE NOT NULL,
-  "user_id" int NOT NULL,
+  _id serial NOT NULL,
+  task varchar NOT NULL,
+  user_id int NOT NULL,
   PRIMARY KEY (_id),
-  FOREIGN KEY (user_id) REFERENCES public.users(_id)
+  FOREIGN KEY (user_id) REFERENCES public.users(_id),
   CONSTRAINT uniqueCombo UNIQUE (user_id, task)
 );
+
 
 -- INSERT INTO public.outfits VALUES (3, 'test')

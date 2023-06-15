@@ -21,10 +21,25 @@ const TaskWindow = () => {
   const [list, setList] = useState([]);
   const [renderList, setRenderList] = useState([]);
   const [edit, setEdit] = useState([]);
-  const [stateFetch, setFetch] = useState({ method: 'POST', value: '', oldVal: '' });
+  const [stateFetch, setFetch] = useState({ method: 'GET', value: '', oldVal: '' });
   const [checked, setChecked] = useState([]);
   const taskItemRef = useRef();
   const updateRef = useRef();
+
+  const LOCAL_STORAGE_KEY = 'currentTodos';
+
+  // persists data when page first loads
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedTodos) setList(storedTodos);
+  }, []);
+
+  // this useEffect saves it to a local storage anytime [todos] changes
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list))
+  }, [list]);
+
+
 
   // checkbox for each task
   const handleCheck = (task) => {
@@ -106,16 +121,26 @@ const TaskWindow = () => {
     // make a fetch request to backend here
     const { method, value, oldVal } = stateFetch;
 
-    fetch('/todo', {
-      method: method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ task: value, oldVal })
-    })
-      .then(response => console.log('backend response', response))
-      .catch(err => console.log('err from fetch in todolist', err));
-
+    if (method === 'GET') {
+      fetch('/todo', {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => console.log('backend response', response))
+        .catch(err => console.log('err from fetch in todolist', err));
+    } else {
+      fetch('/todo', {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ task: value, oldVal })
+      })
+        .then(response => console.log('backend response', response))
+        .catch(err => console.log('err from fetch in todolist', err));
+    }
 
     const tempRenderList = list.map((task, idx) => {
       if (!edit[idx]) {
