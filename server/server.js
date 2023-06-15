@@ -10,11 +10,25 @@ const PORT = 3000
 const app = express();
 
 // Handles cors, originally used no cors on front end, then took no cors off and added this to work
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:8080"],
+  methods: ["GET","POST"],
+  credentials: true,
+}));
 //handles parsing 
 app.use(express.json());
 // What this do tho?
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
+app.use(session({
+  key: "id",
+  secret: "something",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 60 * 60 * 24
+  }
+}))
 
 
 // Require in all our routers
