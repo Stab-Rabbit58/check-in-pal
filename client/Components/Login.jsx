@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Grid,
   Paper,
@@ -12,10 +12,7 @@ import {
 import { LockOutlined } from '@mui/icons-material';
 import FormControlContext from '@mui/material/FormControl/FormControlContext';
 import { useNavigate } from 'react-router-dom';
-// import Grid from '@mui/material/Grid';
-// import Paper from '@mui/material/Paper';
-// import Avatar from '@mui/material/Avatar';
-// import TextField from '@mui/material/TextField';
+import { UserContext } from '../MyContext';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -69,11 +66,13 @@ const Login = () => {
     //     // setLoggedIn(response.data.user[0].username)
     //   })
     // }
-    
+
   }, []);
 
   const usernameRef = useRef();
   const passRef = useRef();
+
+  const { userID, setUserID } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -89,10 +88,12 @@ const Login = () => {
         },
         body: JSON.stringify({ username, password }),
       });
-      console.log('response from backend', response);
+      const data = await response.json();
+      setUserID(data.userID);
+
       if (response.status === 200) {
         navigate('/home');
-      } else if (response.status === 401){
+      } else if (response.status === 401) {
         window.alert('Wrong password');
       } else if (response.status === 402) {
         window.alert('User does not exist')
