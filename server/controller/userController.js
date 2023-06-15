@@ -22,7 +22,9 @@ userController.newUser = async (req, res, next) => {
 
 userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
-  const text = 'SELECT * FROM public.users WHERE username = $1 and password = $2';
+  console.log(username, password)
+  console.log(req.body)
+  const text = 'SELECT * FROM "public"."users" WHERE username = $1 and password = $2';
   try {
     const result = await db.query(text, [username, password]);
     if (result.rows.length > 0) {
