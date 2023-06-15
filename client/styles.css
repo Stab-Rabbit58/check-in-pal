@@ -180,6 +180,19 @@ td {
   font-size: 22px;
 }
 
+.study-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.study-task-window {
+  width: 600px;
+}
+
+.study-timer {
+  margin-right: 50px;
+}
+
 .StudyZone:hover {
   color: white;
   background-color: lightblue;
@@ -192,6 +205,13 @@ td {
   margin: 20px;
   text-decoration: none;
   font-size: 20px;
+}
+
+.spotify-player {
+  position: fixed;
+  bottom: 20px;
+  right: 90px;
+  width: 750px;
 }
 
 /* google search bar styling */
