@@ -7,6 +7,10 @@ router.post('/', todoController.addTask, (req, res) => {
   res.sendStatus(200);
 });
 
+router.patch('/', todoController.updateTask, (req, res) => {
+  res.sendStatus(200);
+});
+
 router.delete('/', todoController.deleteTask, (req, res) => {
   res.sendStatus(200);
 });

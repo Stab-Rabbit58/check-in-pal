@@ -21,9 +21,25 @@ const TaskWindow = () => {
   const [list, setList] = useState([]);
   const [renderList, setRenderList] = useState([]);
   const [edit, setEdit] = useState([]);
+  const [stateFetch, setFetch] = useState({ method: 'GET', value: '', oldVal: '' });
   const [checked, setChecked] = useState([]);
   const taskItemRef = useRef();
   const updateRef = useRef();
+
+  const LOCAL_STORAGE_KEY = 'currentTodos';
+
+  // persists data when page first loads
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedTodos) setList(storedTodos);
+  }, []);
+
+  // this useEffect saves it to a local storage anytime [todos] changes
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list))
+  }, [list]);
+
+
 
   // checkbox for each task
   const handleCheck = (task) => {
@@ -43,8 +59,9 @@ const TaskWindow = () => {
   const handleAdd = () => {
     const newTask = taskItemRef.current.value;
 
-    if (newTask !== '') {
+    if (newTask !== '' && !list.includes(newTask)) {
       setList([...list, newTask]);
+      setFetch({ ...stateFetch, method: 'POST', value: newTask });
       taskItemRef.current.value = '';
     }
   };
@@ -62,6 +79,8 @@ const TaskWindow = () => {
     // updated task from ref
     const updatedTask = updateRef.current.value;
     const newList = [...list];
+
+    const oldVal = list[idx];
     console.log('pre splice', newList);
 
     newList.splice(idx, 1, updatedTask);
@@ -71,14 +90,17 @@ const TaskWindow = () => {
 
     console.log('new List', newList);
 
-    setEdit(editList), setList(newList);
+    // set states
+    setEdit(editList)
+    setList(newList);
+    setFetch({ ...stateFetch, method: 'PATCH', value: updatedTask, oldVal: oldVal })
   };
 
   // delete task
   const handleDelete = (idx) => {
     // delete from list array
     const newList = [...list];
-    newList.splice(idx, 1);
+    const deletedVal = newList.splice(idx, 1);
     setList(newList);
 
     // account for checked tasks
@@ -88,19 +110,37 @@ const TaskWindow = () => {
       const idxLoc = newChecked.indexOf(idx);
       newChecked.splice(idxLoc, 1);
     }
-    setChecked(newChecked);
+
+    // set states
+    setChecked(newChecked)
+    setFetch({ ...stateFetch, method: 'DELETE', value: deletedVal });
   };
 
   useEffect(() => {
-    // make a post request to backend here
 
-    /* 
-    fetch('/todo', {
-      Method: 'POST',
-      'Content-Headers': '
-    })
+    // make a fetch request to backend here
+    const { method, value, oldVal } = stateFetch;
 
-    */
+    if (method === 'GET') {
+      fetch('/todo', {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => console.log('backend response', response))
+        .catch(err => console.log('err from fetch in todolist', err));
+    } else {
+      fetch('/todo', {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ task: value, oldVal })
+      })
+        .then(response => console.log('backend response', response))
+        .catch(err => console.log('err from fetch in todolist', err));
+    }
 
     const tempRenderList = list.map((task, idx) => {
       if (!edit[idx]) {
