@@ -22,12 +22,12 @@ const App = () => {
     // create routes
     <>
       <Routes>
-        <Route path="/" element={<TaskWindow />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/checkin" />
         <Route path="/home" element={<Home />} />
-        <Route path="/todo" />
+        <Route path="/todo" element={<TaskWindow />} />
         <Route path="/studyzone" element={<Study />} />
       </Routes>
       {/* <SignUp/> */}
