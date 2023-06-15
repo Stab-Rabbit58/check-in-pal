@@ -20,6 +20,24 @@ todoController.addTask = async (req, res, next) => {
   }
 };
 
+todoController.updateTask = async (req, res, next) => {
+  const { task, oldVal } = req.body;
+  const text = `UPDATE public.tasks SET task=$1 WHERE tasks.task = $2`
+  console.log('entered middleware update task')
+  try {
+    await db.query(text, [task, oldVal]);
+    console.log('Task updated!')
+    return next();
+  } catch (err) {
+    console.error(err)
+    return next({
+      log: "Express error handler caught an error in the updateTask middleware",
+      status: 500,
+      message: { err: "An error occurred in the updateTask middleware" }
+    })
+  }
+};
+
 todoController.deleteTask = async (req, res, next) => {
   const { task } = req.body;
   const text = `DELETE FROM public.tasks WHERE task=$1`
@@ -31,7 +49,7 @@ todoController.deleteTask = async (req, res, next) => {
   } catch (err) {
     console.error(err)
     return next({
-      log: "Express error handler caught an error in the addTask middleware",
+      log: "Express error handler caught an error in the deleteTask middleware",
       status: 500,
       message: { err: "An error occurred in the deleteTask middleware" }
     })
