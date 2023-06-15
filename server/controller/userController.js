@@ -14,7 +14,7 @@ userController.newUser = (req, res, next) => {
         db.query(text, [username, response])
           .then(response => {
             console.log('New user created!')
-            res.locals.pass = response
+            // res.locals.pass = response
             return next();
           })
           .catch(err => {
@@ -47,7 +47,7 @@ userController.verifyUser = (req, res, next) => {
           .then(response2 => {
             console.log("bcrypt compare response", response2)
             if (response2) {
-              req.session.loggedIn = result;
+              // req.session.loggedIn = result;
               
               console.log("User verified!")
               return next();

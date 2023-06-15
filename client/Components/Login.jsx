@@ -50,7 +50,7 @@ const Login = () => {
     // }
     navigate('/home')
   };
-  const [loggedIn, setLoggedIn] = useState("")
+
   useEffect(() => {
     google.accounts.id.initialize({
       client_id:
@@ -62,13 +62,13 @@ const Login = () => {
       theme: 'outline',
       size: 'auto',
     });
-    if (loggedIn === "") {
-      fetch('/localhost:8080/login')
-      .then(response => {
-        console.log(response);
-        // setLoggedIn(response.data.user[0].username)
-      })
-    }
+    // if (loggedIn === "") {
+    //   fetch('/localhost:8080/login')
+    //   .then(response => {
+    //     console.log(response);
+    //     // setLoggedIn(response.data.user[0].username)
+    //   })
+    // }
     
   }, []);
 
