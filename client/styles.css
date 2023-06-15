@@ -154,6 +154,13 @@ td {
   background-color: lightblue;
 }
 
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .Home {
   color: black;
   margin: 20px;
@@ -193,11 +200,53 @@ td {
 }
 
 .search-bar {
+  /* width: 100%; */
+  width: 700px;
+  background: rgba(255, 255, 255, 0.3);
   display: flex;
-  /* align-items: center; */
-  flex: 1;
+  align-items: center;
+  border-radius: 60px;
+  padding: 10px 20px;
 }
 
 .search-box {
-  width: 1000px;
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 24px 20px;
+  font-size: 20px;
+  color: #151516;
+}
+
+.search-bar button {
+  border: 0;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background: rgba(82, 93, 250, 0.363);
+  cursor: pointer;
+}
+
+/* navbar */ 
+.UserProfile {
+  height: 35px;
+  width: 35px;
+}
+.UserProfile:hover {
+  box-shadow: 2px 2px 10px gray;
+}
+.profileModal {
+  background-color: black;
+  position: fixed;
+  top: 82px;
+  left: 1250px;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.popper {
+
+  z-index: 2;
 }

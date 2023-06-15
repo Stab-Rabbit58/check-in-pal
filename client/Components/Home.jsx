@@ -7,10 +7,10 @@ import { useState, useEffect } from 'react';
 const Home = () => {
 
   return (
-    <>
+    <div className="home-container">
       <Navbar />
       <SearchBar />
-    </>
+    </div>
   );
 };
 
