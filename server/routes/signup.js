@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.post('/', userController.newUser, (req, res) => {
-  res.sendStatus(200);
+  res.status(200).send(res.locals.pass);
 });
 
 //export module

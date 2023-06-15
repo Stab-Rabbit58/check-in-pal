@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Typography } from '@mui/material';
 
 const TaskTimer = () => {
   const [time, setTime] = useState(0);
@@ -8,15 +9,15 @@ const TaskTimer = () => {
     let intervalId;
     if (running) {
       intervalId = setInterval(() => {
-        setTime(time + 1), 10;
-      });
+        setTime(time + 1);
+      }, 10);
     }
     return () => clearInterval(intervalId);
   }, [running, time]);
 
   const hours = Math.floor(time / 360000);
   const minutes = Math.floor((time % 360000) / 6000);
-  const seconds = Math.floor((time & 6000) / 100);
+  const seconds = Math.floor((time % 6000) / 100);
   const milliseconds = time % 100;
 
   const startAndStop = () => {
@@ -29,18 +30,30 @@ const TaskTimer = () => {
 
   return (
     <div className="stopwatch-container">
-      <p className="stopwatch-time">
+      <Typography
+        variant="h1"
+        sx={{ fontSize: '10rem' }}
+        className="stopwatch-time"
+      >
         {hours}:{minutes.toString().padStart(2, '0')}:
         {seconds.toString().padStart(2, '0')}:
         {milliseconds.toString().padStart(2, '0')}
-      </p>
+      </Typography>
       <div className="stopwatch-buttons">
-        <button className="stopwatch-button" onClick={startAndStop}>
+        <Button
+          variant="contained"
+          className="stopwatch-button"
+          onClick={startAndStop}
+        >
           {running ? 'Stop' : 'Start'}
-        </button>
-        <button className="stopwatch-button" onClick={reset}>
+        </Button>
+        <Button
+          variant="contained"
+          className="stopwatch-button"
+          onClick={reset}
+        >
           Reset
-        </button>
+        </Button>
       </div>
     </div>
   );
