@@ -38,20 +38,20 @@ todoController.deleteTask = async (req, res, next) => {
   }
 };
 
-todoController.getTask = async (req, res, next) => {
-  const text = "SELECT * FROM public.tasks"
-  try {
-    const response = await db.query(text)
-    console.log("GET for tasks successful")
-    res.locals.tasks = response.rows
-    return next();
-  } catch (err) {
-    console.error(err)
-    return next({
-      log: "Express error handler caught an error in the getTask middleware",
-      status: 500,
-      message: { err: "An error occurred in the getTask middleware" }
-    })
-  }
-
-}
+// todoController.getTask = async (req, res, next) => {
+//   const text = "SELECT * FROM public.tasks"
+//   try {
+//     const response = await db.query(text)
+//     console.log("GET for tasks successful")
+//     res.locals.tasks = response.rows
+//     return next();
+//   } catch (err) {
+//     console.error(err)
+//     return next({
+//       log: "Express error handler caught an error in the getTask middleware",
+//       status: 500,
+//       message: { err: "An error occurred in the getTask middleware" }
+//     })
+//   }
+// }
+module.exports = todoController

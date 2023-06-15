@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
 const PORT = 3000
 
@@ -15,9 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Require in all our routers
-const loginRouter = require('./routes/login');
-const signupRouter = require('./routes/signup')
-const todoRouter = require('./routes/todo');
+const loginRouter = require('./routes/login.js');
+const signupRouter = require('./routes/signup.js')
+const todoRouter = require('./routes/todo.js');
 // const checkoutRouter = require ('./routes/checkout');
 
 

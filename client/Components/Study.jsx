@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import TaskTimer from './TaskTimer.jsx';
+import NavBar from './NavBar.jsx';
+import TaskWindow from './ToDoList.jsx';
 
 const Study = () => {
   // add a current task selector
-  // add task list component  
+  // add task list component
   return (
     <div className="study">
+      <NavBar />
+      <TaskWindow />
       <TaskTimer />
       <iframe
         style={{ borderRadius: '12px' }}
