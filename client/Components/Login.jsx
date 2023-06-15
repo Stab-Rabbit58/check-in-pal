@@ -48,6 +48,7 @@ const Login = () => {
     // } catch (error) {
     //   console.log(error);
     // }
+    navigate('/home')
   };
   const [loggedIn, setLoggedIn] = useState("")
   useEffect(() => {
