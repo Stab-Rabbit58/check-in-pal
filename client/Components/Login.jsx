@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Grid,
   Paper,
@@ -45,7 +45,7 @@ const Login = () => {
     // } catch (error) {
     //   console.log(error);
     // }
-    navigate('/home')
+    navigate('/home');
   };
 
   useEffect(() => {
@@ -59,6 +59,14 @@ const Login = () => {
       theme: 'outline',
       size: 'auto',
     });
+    // if (loggedIn === "") {
+    //   fetch('/localhost:8080/login')
+    //   .then(response => {
+    //     console.log(response);
+    //     // setLoggedIn(response.data.user[0].username)
+    //   })
+    // }
+
   }, []);
 
   const usernameRef = useRef();
@@ -85,8 +93,10 @@ const Login = () => {
 
       if (response.status === 200) {
         navigate('/home');
-      } else {
-        window.alert('Login Failed!');
+      } else if (response.status === 401) {
+        window.alert('Wrong password');
+      } else if (response.status === 402) {
+        window.alert('User does not exist')
       }
     } catch (error) {
       console.log(error);
