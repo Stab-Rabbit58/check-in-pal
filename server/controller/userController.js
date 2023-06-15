@@ -36,17 +36,17 @@ userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
   console.log(username, password)
   console.log(req.body)
-  const text = 'SELECT * FROM "public"."users" WHERE username = $1 and password = $2';
+  const text = 'SELECT * FROM "public"."users" WHERE username = $1';
   try {
-    const result = await db.query(text, [username, password]);
+    const result = await db.query(text, [username]);
     if (result.rows.length > 0) {
-      const bcyrptBool = await bcrypt.compare(password, response.rows[0].password);
-      const bcryptResponse = await bcrypt.hash(password, saltRounds);
+      const bcyrptBool = await bcrypt.compare(password, result.rows[0].password);
       if (bcyrptBool) {
 
         // get userid
-        const queryStringID = `SELECT _id FROM public.users WHERE username = $1 AND password = $2;`
-        const userID = await db.query(queryStringID, [username, bcryptResponse]);
+        const queryStringID = `SELECT _id FROM public.users WHERE username = $1;`
+        const userID = await db.query(queryStringID, [username]);
+        console.log('userID', userID);
         res.locals.userID = userID.rows[0]._id;
 
         return next();

@@ -10,8 +10,10 @@ todoController.getTask = async (req, res, next) => {
     const response = await db.query(text, [userID]);
     console.log("GET for tasks successful");
 
+    const { rows } = response;
+    rows.sort((a, b) => a._id - b._id)
     const entries = [];
-    response.rows.forEach(entry => entries.push(entry.task));
+    rows.forEach(entry => entries.push(entry.task));
     console.log('response', entries);
     res.locals.tasks = entries;
     return next();
