@@ -10,7 +10,7 @@ const TaskTimer = () => {
     if (running) {
       intervalId = setInterval(() => {
         setTime(time + 1);
-      }, 10);
+      }, 8);
     }
     return () => clearInterval(intervalId);
   }, [running, time]);

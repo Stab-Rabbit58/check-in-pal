@@ -28,23 +28,6 @@ const Login = () => {
   const handleCallbackResponse = async (response) => {
     console.log('Encoded JWT ID token: ' + response.credential);
     console.log('Successful login');
-    // try {
-    //   const response = await fetch('/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ username, password }),
-    //   });
-    //   console.log('response from backend', response);
-    //   if (response.status === 200) {
-    //     navigate('/home');
-    //   } else {
-    //     window.alert('Login Failed!');
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
     navigate('/home');
   };
 
@@ -59,13 +42,7 @@ const Login = () => {
       theme: 'outline',
       size: 'auto',
     });
-    // if (loggedIn === "") {
-    //   fetch('/localhost:8080/login')
-    //   .then(response => {
-    //     console.log(response);
-    //     // setLoggedIn(response.data.user[0].username)
-    //   })
-    // }
+
 
   }, []);
 

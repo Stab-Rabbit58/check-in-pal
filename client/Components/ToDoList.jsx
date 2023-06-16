@@ -102,6 +102,7 @@ const TaskWindow = () => {
     // delete from list array
     const newList = [...list];
     const deletedVal = newList.splice(idx, 1);
+    console.log('deletedVal', deletedVal);
     setList(newList);
 
     // account for checked tasks

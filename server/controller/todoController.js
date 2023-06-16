@@ -67,9 +67,17 @@ todoController.updateTask = async (req, res, next) => {
 todoController.deleteTask = async (req, res, next) => {
   const { task, userID } = req.body;
   const text = `DELETE FROM public.tasks WHERE task=$1 AND user_id=$2`
+  const test = `SELECT * FROM public.tasks WHERE user_id=$1`
   console.log('entered middleware delete task')
   try {
-    await db.query(text, [task, userID]);
+    console.log('task', task);
+    const preDel = await db.query(test, [userID]);
+    await db.query(text, [task[0], userID]);
+    const postDel = await db.query(test, [userID]);
+
+    console.log('pre delete', preDel);
+    console.log('post delete', postDel);
+
     console.log('Task deleted!')
     return next();
   } catch (err) {
