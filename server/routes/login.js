@@ -6,13 +6,13 @@ const router = express.Router();
 
 
 router.post('/', userController.verifyUser, (req, res) => {
-  res.sendStatus(200)
+  res.status(200).json({ userID: res.locals.userID });
 });
 router.get('/', (req, res) => {
   if (req.session.username) {
-    res.send({loggedIn: true, user: req.session.username})
+    res.send({ loggedIn: true, user: req.session.username })
   } else {
-    res.send({loggedIn: false})
+    res.send({ loggedIn: false })
   }
 })
 

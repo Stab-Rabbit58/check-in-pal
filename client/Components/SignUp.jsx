@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router';
-import { Grid, Paper, TextField, Button, FormGroup } from '@mui/material';
+import React, { useEffect, useRef, useContext } from "react";
+import { useNavigate } from "react-router";
+import { Grid, Paper, TextField, Button, FormGroup } from "@mui/material";
+import { UserContext } from '../MyContext';
+
 
 const SignUp = () => {
   const navigate = useNavigate();
 
   const usernameRef = useRef();
   const passRef = useRef();
+
+  const { userID, setUserID } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,16 +28,18 @@ const SignUp = () => {
       },
       body: JSON.stringify({ username, password }),
     })
-      .then((response) => {
-        console.log('response: ', response);
+      .then(response => {
         if (response.status === 200) {
           navigate('/home');
         } else {
           window.alert('Username already exists!');
         }
+        return response.json();
       })
-      .catch((err) => console.log('error', err));
-  };
+      .then(data => setUserID(data.userID))
+      .catch(err => console.log('error', err))
+
+  }
 
   const google = window.google;
 
@@ -69,7 +75,6 @@ const SignUp = () => {
   return (
     <div className="sign-up">
       <form onSubmit={handleSubmit}>
-        {/* <Grid> */}
         <Paper elevation={10} style={paperStyle}>
           <h2>Sign Up</h2>
           <FormGroup>
@@ -104,7 +109,6 @@ const SignUp = () => {
             <Button onClick={() => navigate('/login')}>Back to login</Button>
           </FormGroup>
         </Paper>
-        {/* </Grid> */}
       </form>
     </div>
   );

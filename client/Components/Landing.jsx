@@ -1,5 +1,6 @@
 import React from "react";
 import CheckinButton from "./CheckinButton.jsx";
+import { motion } from 'framer-motion'
 
 const Landing = () => {
 

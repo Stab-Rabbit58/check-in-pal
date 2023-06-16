@@ -37,13 +37,17 @@ const signupRouter = require('./routes/signup.js')
 const todoRouter = require('./routes/todo.js');
 // const checkoutRouter = require ('./routes/checkout');
 
-
+app.get('bundle.js', (req, res, next) => {
+  res.status(200).sendFile(path.resolve(__dirname, '..build/bundle.js'));
+});
 // Route handlers
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/todo', todoRouter);
 // app.use('/checkout', checkoutRouter);
-
+app.use((req, res, next) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../build/index.html'))
+})
 
 
 // Catch-all route error handler

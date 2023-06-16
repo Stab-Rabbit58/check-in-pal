@@ -3,9 +3,11 @@ body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  height: 150vh;
-  margin-top: 80px;
-  padding: 30px;
+  height: 100vh;
+  margin: 80px 0 0 0;
+  padding: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 @keyframes gradient {
@@ -129,6 +131,11 @@ td {
   box-shadow: -2px 3px 3px 2px rgba(0, 0, 0, 0.3);
 }
 
+.todo {
+  margin-top: 15%;
+  margin-left: 2%;
+}
+
 /* NavBar */
 .navbar {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -153,23 +160,37 @@ td {
   margin: 20px;
   text-decoration: none;
   font-size: 22px;
+  transition: 0.2s;
 }
 
 .ToDo:hover {
-  color: white;
-  background-color: lightblue;
+  /* color: white; */
+  /* background-color: lightblue; */
+  font-size: 25px;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.178);
 }
 
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
 .Home {
   color: black;
   margin: 20px;
   text-decoration: none;
   font-size: 22px;
+  transition: 0.2s;
 }
 
 .Home:hover {
-  color: white;
-  background-color: lightblue;
+  /* color: white;
+  background-color: lightblue; */
+  font-size: 25px;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.178);
 }
 
 .Study {
@@ -177,6 +198,14 @@ td {
   margin: 20px;
   text-decoration: none;
   font-size: 22px;
+  transition: 0.2s;
+}
+
+.Study:hover {
+  /* color: white;
+  background-color: lightblue; */
+  font-size: 25px;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.178);
 }
 
 .study-container {
@@ -185,10 +214,12 @@ td {
 }
 
 .study-task-window {
-  width: 600px;
+  width: 700px;
+  margin-left: 20px;
 }
 
 .study-timer {
+  margin-top: 130px;
   margin-right: 50px;
 }
 
@@ -206,24 +237,32 @@ td {
 
 .spotify-player {
   position: fixed;
-  bottom: 20px;
-  right: 90px;
-  width: 750px;
+  bottom: 3%;
+  right: 2%;
+  width: 45%;
 }
 
 .Logout {
   color: black;
-  position: fixed;
-  margin: 20px;
+  /* position: fixed; */
+  /* margin: 20px; */
   text-decoration: none;
   font-size: 22px;
-  right: 0;
-  margin: 30px;
+  /* right: 20px; */
+  /* margin: 30px; */
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 0px;
 }
 
-.Logout:hover {
-  color: white;
-  background-color: lightblue;
+/* .LogoutText {
+  transition: font-weight  0.2s;
+} */
+
+.LogoutText:hover {
+  transition: font-weight .2s, text-shadow .2s, ease-in-out;
+  font-weight: bold;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.178);
 }
 
 /* google search bar styling */
@@ -232,11 +271,73 @@ td {
 }
 
 .search-bar {
+  /* width: 100%; */
+  width: 700px;
+  background: rgba(255, 255, 255, 0.3);
   display: flex;
-  /* align-items: center; */
-  flex: 1;
+  align-items: center;
+  border-radius: 60px;
+  padding: 10px 20px;
+  margin-bottom: 200px;
 }
 
 .search-box {
-  width: 1000px;
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 24px 20px;
+  font-size: 20px;
+  color: #151516;
+}
+
+.search-bar button {
+  border: 0;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background: rgba(82, 93, 250, 0.363);
+  cursor: pointer;
+}
+
+/* navbar */ 
+.UserProfile {
+  height: 35px;
+  width: 35px;
+  border: 1px solid rgb(200, 200, 200);
+  /* position: absolute;
+  right: 0; */
+  margin-left: 70%;
+}
+
+.UserProfile:hover {
+  box-shadow: 2px 2px 20px gray;
+  cursor: pointer;
+}
+.profileModal {
+  background-color: black;
+  position: fixed;
+  top: 13%;
+  left: 86%;
+  width: 200px;
+  height: 200px;
+  border-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  box-shadow: 0px 0px 15px black;
+}
+.modalButton {
+  height: 10px;
+  width: 10px;
+  margin-bottom: 7px;
+  margin-left: 83px;
+}
+
+.popper {
+  display: flex;
+  z-index: 3;
 }
